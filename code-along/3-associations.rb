@@ -14,6 +14,7 @@ puts "There are #{Company.all.count} companies"
 puts "There are #{Contact.all.count} contacts"
 
 apple = Company.find_by({"name" => "Apple"})
+amazon = Company.find_by({"name" => "Amazon"})
 
 contact = Contact.new
 contact["first_name"] = "Tim"
@@ -27,6 +28,13 @@ contact["first_name"] = "Craig"
 contact["last_name"] = "Federighi"
 contact["email"] = "craig@apple.com"
 contact["company_id"] = apple["id"]
+contact.save
+
+contact = Contact.new
+contact["first_name"] = "Jeff"
+contact["last_name"] = "Bezos"
+contact["email"] = "jeff@amazon.com"
+contact["company_id"] = amazon["id"]
 contact.save
 
 puts "There are #{Contact.all.count} contacts"

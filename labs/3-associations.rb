@@ -18,6 +18,7 @@ Activity.destroy_all
 # a single salesperson and 2 different contacts
 
 tim = Contact.find_by({"first_name" => "Tim"})
+jeff = Contact.find_by({"first_name" => "Jeff"})
 ben = Salesperson.find_by({"first_name" => "Ben"})
 
 activity = Activity.new
@@ -26,10 +27,26 @@ activity["salesperson_id"] = ben["id"]
 activity["note"] = "quick checkin over facetime"
 activity.save
 
+activity = Activity.new
+activity["contact_id"] = tim["id"]
+activity["salesperson_id"] = ben["id"]
+activity["note"] = "met at Cupertino"
+activity.save
+
+activity = Activity.new
+activity["contact_id"] = jeff["id"]
+activity["salesperson_id"] = ben["id"]
+activity["note"] = "met at Blue Origin HQ"
+activity.save
+
 puts "There are #{Activity.all.count} activities" 
 
 # 2. Display all the activities between the salesperson used above
 # and one of the contacts (sample output below):
+
+puts "Activities between #{ben["first_name"]} and #{tim["first_name"]} Cook:"
+activities = Activity.where({"salesperson_id" => ben["id"], "contact_id"})
+
 
 # ---------------------------------
 # Activities between Ben and Tim Cook:
